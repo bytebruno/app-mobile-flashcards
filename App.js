@@ -4,17 +4,13 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { StyleSheet, Text, View } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import DeckList from './components/DeckList'
+import DeckDetail from './components/DeckDetail'
 
 
 
 const theme = {
   ...DefaultTheme,
   roundness: 0,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#3498db',
-    accent: '#f1c40f',
-  },
 };
 
 export default function App() {
@@ -25,7 +21,8 @@ export default function App() {
         style={styles.container}
         start={[0.1, 0.1]}
       >
-        <DeckList />
+        <DeckDetail />
+        {/* <DeckList /> */}
       </LinearGradient>
     </PaperProvider>
   )
