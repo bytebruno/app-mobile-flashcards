@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Title, Subheading, Button, TextInput } from 'react-native-paper'
+import { View, StyleSheet } from 'react-native'
+import { Title, Button, TextInput } from 'react-native-paper'
 
 const NewDeck = () => {
   const [title, setTitle] = useState('New Title')

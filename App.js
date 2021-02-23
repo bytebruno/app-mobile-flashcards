@@ -3,9 +3,11 @@ import React from 'react'
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { StyleSheet, Text, View } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
+
 import DeckList from './components/DeckList'
 import DeckDetail from './components/DeckDetail'
 import NewDeck from './components/NewDeck'
+import NewQuestion from './components/NewQuestion'
 
 
 
@@ -22,8 +24,8 @@ export default function App() {
         style={styles.container}
         start={[0.1, 0.1]}
       >
-        
-        <NewDeck />
+        <NewQuestion />
+        {/* <NewDeck /> */}
         {/* <DeckDetail /> */}
         {/* <DeckList /> */}
       </LinearGradient>
