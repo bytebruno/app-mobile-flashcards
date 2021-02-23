@@ -24,10 +24,10 @@ export default function App() {
         style={styles.container}
         start={[0.1, 0.1]}
       >
-        <NewQuestion />
+        {/* <NewQuestion /> */}
         {/* <NewDeck /> */}
         {/* <DeckDetail /> */}
-        {/* <DeckList /> */}
+        <DeckList />
       </LinearGradient>
     </PaperProvider>
   )
