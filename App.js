@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import DeckList from './components/DeckList'
 import DeckDetail from './components/DeckDetail'
+import NewDeck from './components/NewDeck'
 
 
 
@@ -21,7 +22,9 @@ export default function App() {
         style={styles.container}
         start={[0.1, 0.1]}
       >
-        <DeckDetail />
+        
+        <NewDeck />
+        {/* <DeckDetail /> */}
         {/* <DeckList /> */}
       </LinearGradient>
     </PaperProvider>
