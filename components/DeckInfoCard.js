@@ -3,13 +3,13 @@ import React from 'react'
 import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 import { StyleSheet, View } from 'react-native'
 
-const DeckInfoCard = () => (
+const DeckInfoCard = ({deck}) => (
   <View style={styles.container}>
     <TouchableNativeFeedback>
       <Card>
-        <Card.Title title='Technology' subtitle='Deck' />
+        <Card.Title title={deck.name} subtitle='Deck' />
         <Card.Content>
-          <Subheading>2 cards</Subheading>
+          <Subheading>{deck.cards.length} cards</Subheading>
         </Card.Content>
       </Card>
     </TouchableNativeFeedback>
