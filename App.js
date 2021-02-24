@@ -9,6 +9,9 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+
 import DeckList from './components/DeckList'
 import DeckDetail from './components/DeckDetail'
 import NewDeck from './components/NewDeck'
@@ -19,22 +22,22 @@ const theme = {
   roundness: 0,
 }
 
+const Stack = createStackNavigator()
+
 export default function App() {
   return (
-    <Provider store={createStore(reducer, applyMiddleware(thunk))}>
-      <PaperProvider theme={theme}>
-        <LinearGradient
-          colors={['#7f7fd5', '#86a8e7', '#91eae4']}
-          style={styles.container}
-          start={[0.1, 0.1]}
-        >
-          {/* <NewQuestion /> */}
-          <NewDeck />
-          {/* <DeckDetail /> */}
-          <DeckList />
-        </LinearGradient>
-      </PaperProvider>
-    </Provider>
+    <NavigationContainer>
+      <Provider store={createStore(reducer, applyMiddleware(thunk))}>
+        <PaperProvider theme={theme}>
+            <Stack.Navigator initialRouteName="Decks"> 
+              <Stack.Screen name='DeckList' component={DeckList} options={{headerTitle: 'Decks'}} />
+              <Stack.Screen name='DeckDetail' component={DeckDetail} options={{headerTitle: 'Deck'}} />
+              <Stack.Screen name='NewDeck' component={NewDeck} options={{headerTitle: 'New Deck'}} />
+              <Stack.Screen name='NewQuestion' component={NewQuestion} options={{headerTitle: 'New Question'}} />
+            </Stack.Navigator>
+        </PaperProvider>
+      </Provider>
+    </NavigationContainer>
   )
 }
 

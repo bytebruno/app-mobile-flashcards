@@ -18,7 +18,7 @@ const NewDeck = ({dispatch}) => {
 }
 
   const addDeck = () => {
-    dispatch(handleAddDeck(createDeckObject(title))).then((dispatch) => getDecks().then((receivedDecks) => dispatch(receiveDecks(receivedDecks))))
+    dispatch(handleAddDeck(createDeckObject(title))).then(() => getDecks().then((receivedDecks) => dispatch(receiveDecks(receivedDecks))))
   }
 
   return (

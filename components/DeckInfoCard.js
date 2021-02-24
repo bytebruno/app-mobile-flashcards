@@ -3,9 +3,9 @@ import React from 'react'
 import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 import { StyleSheet, View } from 'react-native'
 
-const DeckInfoCard = ({deck}) => (
+const DeckInfoCard = ({deck, goToDetails}) => (
   <View style={styles.container}>
-    <TouchableNativeFeedback>
+    <TouchableNativeFeedback onPress={() => goToDetails(deck.id)}>
       <Card>
         <Card.Title title={deck.name} subtitle='Deck' />
         <Card.Content>

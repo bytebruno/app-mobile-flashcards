@@ -1,13 +1,21 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Title, Subheading, Button } from 'react-native-paper'
+import {connect} from 'react-redux'
 
-const DeckDetail = () => {
+const DeckDetail = ({route, decks}) => {
+
+  console.log(decks)
+  if (decks === undefined) return <Text>Error</Text>;
+  
+  const {id} = route.params;
+  const deck = decks[id];
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Title style={{fontSize:26}}>Technology</Title>
-        <Subheading style={{fontSize:20}}>3 cards</Subheading>
+        <Title style={{fontSize:26}}>{deck.name}</Title>
+        <Subheading style={{fontSize:20}}>{deck.cards.length} cards</Subheading>
       </View>
       <View style={styles.buttonContainer}>
         <Button
@@ -55,4 +63,10 @@ const styles = StyleSheet.create({
   },
 })
 
-export default DeckDetail
+const mapStateToProps = (decks) => {
+  return {
+    decks
+  }
+}
+
+export default connect(mapStateToProps)(DeckDetail)
