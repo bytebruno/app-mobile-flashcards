@@ -1,9 +1,25 @@
 import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Title, Button, TextInput } from 'react-native-paper'
+import {connect} from 'react-redux'
 
-const NewDeck = () => {
+import {handleAddDeck} from '../actions'
+import { getDecks} from '../utils/api'
+
+const NewDeck = ({dispatch}) => {
   const [title, setTitle] = useState('New Title')
+
+  const createDeckObject = (name) => {
+    return {
+        id: name.trim().toLowerCase().replace(' ',''),
+        name,
+        cards:[]
+    }
+}
+
+  const addDeck = () => {
+    dispatch(handleAddDeck(createDeckObject(title))).then((dispatch) => getDecks().then((receivedDecks) => dispatch(receiveDecks(receivedDecks))))
+  }
 
   return (
     <View style={styles.container}>
@@ -20,7 +36,7 @@ const NewDeck = () => {
           icon='check'
           color='green'
           mode='contained'
-          onPress={() => console.log('Pressed')}
+          onPress={addDeck}
         >
           Save Deck
         </Button>
@@ -47,4 +63,4 @@ const styles = StyleSheet.create({
     },
   })
 
-export default NewDeck
+export default connect()(NewDeck)

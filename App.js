@@ -4,7 +4,8 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { StyleSheet, Text, View } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
+import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 
@@ -20,7 +21,7 @@ const theme = {
 
 export default function App() {
   return (
-    <Provider store={createStore(reducer)}>
+    <Provider store={createStore(reducer, applyMiddleware(thunk))}>
       <PaperProvider theme={theme}>
         <LinearGradient
           colors={['#7f7fd5', '#86a8e7', '#91eae4']}
@@ -28,7 +29,7 @@ export default function App() {
           start={[0.1, 0.1]}
         >
           {/* <NewQuestion /> */}
-          {/* <NewDeck /> */}
+          <NewDeck />
           {/* <DeckDetail /> */}
           <DeckList />
         </LinearGradient>

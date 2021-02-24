@@ -19,7 +19,6 @@ export const removeDeck = (key) => {
 }
 
 export const getDecks = () => {
-    // saveDeck({key:'sample2', deck:{id: 'sample2', name:'Sample Deck 2', cards: []}})
     return AsyncStorage.getItem(DECKS_STORAGE_KEY).then((res) => JSON.parse(res))
 }
 
