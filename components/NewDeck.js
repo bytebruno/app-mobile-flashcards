@@ -18,20 +18,29 @@ const NewDeck = ({ dispatch, navigation }) => {
   }
 
   const addDeck = () => {
-    dispatch(handleAddDeck(createDeckObject(title))).then(() => {
-      dispatch(handleShowSuccessSnackBar('Deck was created!'))
-      navigation.pop()
-      return null
-    })
+    const newDeck = createDeckObject(title)
+
+    dispatch(handleAddDeck(newDeck)).then(
+      () => {
+        dispatch(handleShowSuccessSnackBar('Deck was created!'))
+        navigation.push('DeckDetail', { id: newDeck.id })
+        return null
+      },
+      () => {
+        navigation.pop()
+        return null
+      }
+    )
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Title style={{ fontSize: 26 }}>{title}</Title>
+        <Title style={{ fontSize: 30 }}>{title}</Title>
       </View>
       <View style={styles.formContainer}>
         <TextInput
+          style={styles.input}
           label='Title'
           value={title}
           onChangeText={(text) => setTitle(text)}
@@ -52,12 +61,16 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flex: 1,
-    justifyContent: 'center',
+    marginTop: 20,
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   formContainer: {
-    flex: 2,
-    justifyContent: 'space-around',
+    flex: 3,
+    justifyContent: 'flex-start',
+  },
+  input: {
+    marginBottom: 20,
   },
 })
 

@@ -31,15 +31,17 @@ const NewQuestion = ({ dispatch, decks, route, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Title style={{ fontSize: 26 }}>New Question</Title>
+        <Title style={{ fontSize: 30 }}>New Question</Title>
       </View>
       <View style={styles.formContainer}>
         <TextInput
+          style={styles.input}
           label='Question'
           value={question}
           onChangeText={(text) => setQuestion(text)}
         />
         <TextInput
+          style={styles.input}
           label='Answer'
           value={answer}
           onChangeText={(text) => setAnswer(text)}
@@ -65,13 +67,17 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent:'flex-start',
+    alignItems:'center',
+    marginTop: 20
   },
   formContainer: {
-    flex: 2,
-    justifyContent: 'space-around',
+    flex: 3,
+    justifyContent: 'flex-start',
   },
+  input: {
+    marginBottom: 20
+  }
 })
 
 const mapStateToProps = ({ decks, snackbar }) => {

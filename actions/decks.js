@@ -1,4 +1,5 @@
 import { saveDeck, removeDeck, addQuestion } from '../utils/api'
+import { handleShowErrorSnackBar } from './snackbar'
 
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
@@ -25,7 +26,7 @@ export const addQuestionAction = ({deckId, question}) => {
     type: ADD_QUESTION,
     ...{deckId, question},
   }
-}
+} 
 
 export const removeDeckAction = (id) => {
   return {
@@ -39,7 +40,10 @@ export const handleAddDeck = (deck) => {
   return (dispatch) => {
     return saveDeck({ key: deck.id, deck }).then(() =>
       dispatch(addDeck(deck))
-    )
+    , (err) => {
+      dispatch(handleShowErrorSnackBar(err))
+      return Promise.reject()
+    })
   }
 }
 

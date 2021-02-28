@@ -11,7 +11,7 @@ const DeckInfoCard = ({ deck, goToDetails }) => {
   return <View style={styles.container}>
     <TouchableNativeFeedback onPress={() => goToDetails(deck.id)}>
       <Card>
-        <Card.Title title={deck.name} subtitle='Deck' />
+        <Card.Title title={deck.name}  />
         <Card.Content>
           <Subheading>{cardsText}</Subheading>
         </Card.Content>

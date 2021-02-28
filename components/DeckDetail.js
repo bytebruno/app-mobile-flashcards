@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Title, Subheading, Button } from 'react-native-paper'
+import { View, StyleSheet } from 'react-native'
+import { Title, Button, FAB } from 'react-native-paper'
 import { connect } from 'react-redux'
 
 import { handleRemoveDeck } from '../actions/decks'
@@ -21,36 +21,49 @@ const DeckDetail = ({ route, decks, dispatch, navigation }) => {
     })
   }
 
-  const cardsText = numberOfCardsWithLabelText(deck.cards.length);
+  if (deck === undefined) return null
+  const cardsText = numberOfCardsWithLabelText(deck.cards.length)
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: deck.name,
+    })
+  }, [navigation, deck])
 
   return (
     <Fragment>
       {deck !== undefined ? (
         <View style={styles.container}>
           <View style={styles.headerContainer}>
-            <Title style={{ fontSize: 26 }}>{deck.name}</Title>
-            <Subheading style={{ fontSize: 20 }}>{cardsText}</Subheading>
+            <Title style={{ fontSize: 30 }}>{cardsText}</Title>
           </View>
           <View style={styles.buttonContainer}>
             <Button
               icon='play'
               mode='contained'
+              style={styles.button}
               onPress={() => console.log('Pressed')}
             >
               Start Quiz
             </Button>
-            <Button
-              icon='plus'
-              mode='outlined'
-              onPress={() => navigation.push('NewQuestion', { id: deck.id })}
-            >
-              Add card
-            </Button>
 
-            <Button mode='text' color='red' onPress={() => removeDeck(deck.id)}>
+            <Button
+              icon='delete'
+              color='red'
+              mode='contained'
+              style={styles.button}
+              onPress={() => removeDeck(deck.id)}
+            >
               Delete Deck
             </Button>
           </View>
+          <FAB
+            style={styles.fab}
+            small
+            icon='plus'
+            color='blue'
+            onPress={() => navigation.push('NewQuestion', { id: deck.id })}
+          />
         </View>
       ) : (
         <Title style={styles.notFound}>Deck not found =( </Title>
@@ -63,21 +76,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
     margin: 20,
   },
   headerContainer: {
     flex: 1,
-    justifyContent: 'center',
+    marginTop: 20,
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
+  },
+  button: {
+    marginBottom: 40
   },
   notFound: {
     marginTop: 20,
     textAlign: 'center',
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
   },
 })
 

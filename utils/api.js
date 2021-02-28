@@ -3,10 +3,18 @@ import AsyncStorage from '@react-native-community/async-storage'
 export const DECKS_STORAGE_KEY = 'MobileFlashcards:decks'
 
 export const saveDeck = ({ deck, key }) => {
-  return AsyncStorage.mergeItem(
-    DECKS_STORAGE_KEY,
-    JSON.stringify({ [key]: deck })
-  )
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY).then((results) => {
+    const data = JSON.parse(results)
+
+    if (data[key] !== undefined) {
+      return Promise.reject('Deck already exists')
+    } else {
+      return AsyncStorage.mergeItem(
+        DECKS_STORAGE_KEY,
+        JSON.stringify({ [key]: deck })
+      )
+    }
+  })
 }
 
 export const removeDeck = (key) => {
