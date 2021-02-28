@@ -17,6 +17,11 @@ const NewQuestion = ({ dispatch, decks, route, navigation }) => {
   const [answer, setAnswer] = useState('')
 
   const addQuestion = () => {
+    if (question.length < 2 || answer.length < 2) {
+      dispatch(handleShowErrorSnackBar('Please, fill the question and answer inputs...'))
+      return null;
+    }
+
     dispatch(
       handleAddQuestion({ deckId: id, question: { question, answer } })
     ).then(() => {

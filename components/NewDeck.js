@@ -4,7 +4,7 @@ import { Title, Button, TextInput } from 'react-native-paper'
 import { connect } from 'react-redux'
 
 import { handleAddDeck } from '../actions/decks'
-import { handleShowSuccessSnackBar } from '../actions/snackbar'
+import { handleShowSuccessSnackBar, handleShowErrorSnackBar } from '../actions/snackbar'
 
 const NewDeck = ({ dispatch, navigation }) => {
   const [title, setTitle] = useState('New Title')
@@ -18,6 +18,10 @@ const NewDeck = ({ dispatch, navigation }) => {
   }
 
   const addDeck = () => {
+    if (title.length < 2) {
+      dispatch(handleShowErrorSnackBar('Please, give a bigger name for your deck...'))
+      return null;
+    }
     const newDeck = createDeckObject(title)
 
     dispatch(handleAddDeck(newDeck)).then(
