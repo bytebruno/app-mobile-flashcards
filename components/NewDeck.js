@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import { Title, Button, TextInput } from 'react-native-paper'
 import {connect} from 'react-redux'
 
-import {handleAddDeck} from '../actions'
+import {handleAddDeck} from '../actions/decks'
 import { getDecks} from '../utils/api'
 
 const NewDeck = ({dispatch}) => {

@@ -4,12 +4,13 @@ import { FlatList } from 'react-native-gesture-handler'
 import { connect } from 'react-redux'
 
 import { getDecks } from '../utils/api'
-import { receiveDecks } from '../actions'
+import { receiveDecks } from '../actions/decks'
 
 import DeckInfoCard from './DeckInfoCard'
+import { Button } from 'react-native-paper'
 
 const DeckList = ({ dispatch, decks, navigation }) => {
-
+  console.log(decks)
   useEffect(() => {
     getDecks().then((receivedDecks) => dispatch(receiveDecks(receivedDecks)))
   }, [])
@@ -19,11 +20,12 @@ const DeckList = ({ dispatch, decks, navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container}> 
       <FlatList
         data={Object.values(decks)}
         renderItem={({ item }) => <DeckInfoCard key={item.id} deck={item} goToDetails={goToDetailsHandler}/>}
       />
+      <Button onPress={() => navigation.push('NewDeck')}>Create Deck</Button>
     </View>
   )
 }
@@ -34,10 +36,11 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapStateToProps = (decks) => {
+const mapStateToProps = ({decks, snackbar}) => {
   console.log(decks)
   return {
     decks,
+    snack: snackbar
   }
 }
 
