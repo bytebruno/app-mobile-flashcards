@@ -1,24 +1,28 @@
 import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Title, Button, TextInput } from 'react-native-paper'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
-import {handleAddDeck} from '../actions/decks'
-import { getDecks} from '../utils/api'
+import { handleAddDeck } from '../actions/decks'
+import { handleShowSuccessSnackBar } from '../actions/snackbar'
 
-const NewDeck = ({dispatch}) => {
+const NewDeck = ({ dispatch, navigation }) => {
   const [title, setTitle] = useState('New Title')
 
   const createDeckObject = (name) => {
     return {
-        id: name.trim().toLowerCase().replace(' ',''),
-        name,
-        cards:[]
+      id: name.trim().toLowerCase().replace(' ', ''),
+      name,
+      cards: [],
     }
-}
+  }
 
   const addDeck = () => {
-    dispatch(handleAddDeck(createDeckObject(title))).then(() => getDecks().then((receivedDecks) => dispatch(receiveDecks(receivedDecks))))
+    dispatch(handleAddDeck(createDeckObject(title))).then(() => {
+      dispatch(handleShowSuccessSnackBar('Deck was created!'))
+      navigation.pop()
+      return null
+    })
   }
 
   return (
@@ -32,12 +36,7 @@ const NewDeck = ({dispatch}) => {
           value={title}
           onChangeText={(text) => setTitle(text)}
         />
-        <Button
-          icon='check'
-          color='green'
-          mode='contained'
-          onPress={addDeck}
-        >
+        <Button icon='check' color='green' mode='contained' onPress={addDeck}>
           Save Deck
         </Button>
       </View>
@@ -46,21 +45,20 @@ const NewDeck = ({dispatch}) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      flexDirection: 'column',
-      margin: 20,
-    },
-    headerContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    formContainer: {
-      flex: 2,
-      justifyContent:'space-around'
- 
-    },
-  })
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    margin: 20,
+  },
+  headerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  formContainer: {
+    flex: 2,
+    justifyContent: 'space-around',
+  },
+})
 
 export default connect()(NewDeck)

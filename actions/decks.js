@@ -1,8 +1,10 @@
-import { saveDeck, removeDeck } from '../utils/api'
+import { saveDeck, removeDeck, addQuestion } from '../utils/api'
 
 export const RECEIVE_DECKS = 'RECEIVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
 export const DELETE_DECK = 'DELETE_DECK'
+
+export const ADD_QUESTION = 'ADD_QUESTION'
 
 export const receiveDecks = (decks) => {
   return {
@@ -18,6 +20,13 @@ export const addDeck = (deck) => {
   }
 }
 
+export const addQuestionAction = ({deckId, question}) => {
+  return {
+    type: ADD_QUESTION,
+    ...{deckId, question},
+  }
+}
+
 export const removeDeckAction = (id) => {
   return {
     type: DELETE_DECK,
@@ -25,10 +34,11 @@ export const removeDeckAction = (id) => {
   }
 }
 
+
 export const handleAddDeck = (deck) => {
   return (dispatch) => {
-    return saveDeck({ key: deck.id, deck }).then((savedDeck) =>
-      dispatch(addDeck(savedDeck))
+    return saveDeck({ key: deck.id, deck }).then(() =>
+      dispatch(addDeck(deck))
     )
   }
 }
@@ -40,3 +50,14 @@ export const handleRemoveDeck = (id) => {
     })
   }
 }
+
+export const handleAddQuestion = ({deckId,question}) => {
+  return (dispatch) => {
+    return addQuestion({deckId,question}).then(() =>
+      dispatch(addQuestionAction({deckId, question}))
+    )
+  }
+}
+
+
+

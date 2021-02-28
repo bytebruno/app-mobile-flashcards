@@ -25,7 +25,7 @@ const DeckList = ({ dispatch, decks, navigation }) => {
         data={Object.values(decks)}
         renderItem={({ item }) => <DeckInfoCard key={item.id} deck={item} goToDetails={goToDetailsHandler}/>}
       />
-      <Button onPress={() => navigation.push('NewDeck')}>Create Deck</Button>
+      <Button style={{marginBottom:20}} onPress={() => navigation.push('NewDeck')}>Create Deck</Button>
     </View>
   )
 }

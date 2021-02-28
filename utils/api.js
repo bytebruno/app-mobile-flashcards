@@ -19,9 +19,17 @@ export const removeDeck = (key) => {
 }
 
 export const getDecks = () => {
-    return AsyncStorage.getItem(DECKS_STORAGE_KEY).then((res) => JSON.parse(res))
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY).then((res) => JSON.parse(res))
+}
+
+export const addQuestion = ({ deckId, question }) => {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY).then((results) => {
+    const data = JSON.parse(results)
+    data[deckId].cards.push(question)
+    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
+  })
 }
 
 export const clearAll = () => {
-    return AsyncStorage.clear();
+  return AsyncStorage.clear()
 }

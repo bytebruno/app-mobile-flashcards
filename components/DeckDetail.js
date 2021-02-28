@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import { handleRemoveDeck } from '../actions/decks'
 import { handleShowSuccessSnackBar } from '../actions/snackbar'
+import { numberOfCardsWithLabelText } from '../utils/helpers'
 
 const DeckDetail = ({ route, decks, dispatch, navigation }) => {
   if (decks === undefined) return null
@@ -20,15 +21,15 @@ const DeckDetail = ({ route, decks, dispatch, navigation }) => {
     })
   }
 
+  const cardsText = numberOfCardsWithLabelText(deck.cards.length);
+
   return (
     <Fragment>
       {deck !== undefined ? (
         <View style={styles.container}>
           <View style={styles.headerContainer}>
             <Title style={{ fontSize: 26 }}>{deck.name}</Title>
-            <Subheading style={{ fontSize: 20 }}>
-              {deck.cards.length} cards
-            </Subheading>
+            <Subheading style={{ fontSize: 20 }}>{cardsText}</Subheading>
           </View>
           <View style={styles.buttonContainer}>
             <Button
@@ -41,7 +42,7 @@ const DeckDetail = ({ route, decks, dispatch, navigation }) => {
             <Button
               icon='plus'
               mode='outlined'
-              onPress={() => console.log('Pressed')}
+              onPress={() => navigation.push('NewQuestion', { id: deck.id })}
             >
               Add card
             </Button>
@@ -75,12 +76,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   notFound: {
-    marginTop:20,
-    textAlign: 'center'
-  }
+    marginTop: 20,
+    textAlign: 'center',
+  },
 })
 
-const mapStateToProps = ({decks}) => {
+const mapStateToProps = ({ decks }) => {
   return {
     decks,
   }
