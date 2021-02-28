@@ -14,3 +14,8 @@ Mobile Flashcards App
 * React Native
 * Redux
 * React Native Paper UI
+
+## Android Local Environment
+
+If you have problems running the `yarn android` command. Please check if your android's local environment is all setted correctly.
+If you still having problems after your check-up, you can create a file called `local.properties` inside the android's root folder of this app. In this file you can define the android's sdk path, example: `sdk.dir = C:\\Users\\Bruno\\AppData\\Local\\Android\\sdk`
