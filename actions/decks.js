@@ -7,6 +7,7 @@ export const DELETE_DECK = 'DELETE_DECK'
 
 export const ADD_QUESTION = 'ADD_QUESTION'
 
+
 export const receiveDecks = (decks) => {
   return {
     type: RECEIVE_DECKS,
@@ -34,7 +35,6 @@ export const removeDeckAction = (id) => {
     id,
   }
 }
-
 
 export const handleAddDeck = (deck) => {
   return (dispatch) => {

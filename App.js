@@ -1,8 +1,6 @@
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
-import { StyleSheet, Text, View } from 'react-native'
-import { LinearGradient } from 'expo-linear-gradient'
+import { StyleSheet } from 'react-native'
 
 import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
@@ -19,6 +17,7 @@ import DeckList from './components/DeckList'
 import DeckDetail from './components/DeckDetail'
 import NewDeck from './components/NewDeck'
 import NewQuestion from './components/NewQuestion'
+import Quiz from './components/Quiz'
 
 enableScreens();
 
@@ -40,6 +39,7 @@ export default function App() {
               <Stack.Screen name='DeckDetail' component={DeckDetail} options={{headerTitle: 'Deck'}} />
               <Stack.Screen name='NewDeck' component={NewDeck} options={{headerTitle: 'New Deck'}} />
               <Stack.Screen name='NewQuestion' component={NewQuestion} options={{headerTitle: 'New Question'}} />
+              <Stack.Screen name='Quiz' component={Quiz} options={{headerTitle: 'Quiz'}} />
             </Stack.Navigator>
             <SnackbarComp />
         </PaperProvider>

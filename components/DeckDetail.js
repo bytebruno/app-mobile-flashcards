@@ -4,7 +4,7 @@ import { Title, Button, FAB } from 'react-native-paper'
 import { connect } from 'react-redux'
 
 import { handleRemoveDeck } from '../actions/decks'
-import { handleShowSuccessSnackBar } from '../actions/snackbar'
+import { handleShowSuccessSnackBar, handleShowErrorSnackBar } from '../actions/snackbar'
 import { numberOfCardsWithLabelText } from '../utils/helpers'
 
 const DeckDetail = ({ route, decks, dispatch, navigation }) => {
@@ -19,6 +19,15 @@ const DeckDetail = ({ route, decks, dispatch, navigation }) => {
       navigation.pop()
       return null
     })
+  }
+
+  const startQuiz = (selectedDeck) => {
+    if (selectedDeck.cards.length === 0) {
+      dispatch(handleShowErrorSnackBar('No cards on this deck...'))
+      return null
+    } else {
+      navigation.push('Quiz', {deck: selectedDeck})
+    }
   }
 
   if (deck === undefined) return null
@@ -42,7 +51,7 @@ const DeckDetail = ({ route, decks, dispatch, navigation }) => {
               icon='play'
               mode='contained'
               style={styles.button}
-              onPress={() => console.log('Pressed')}
+              onPress={() => startQuiz(deck)}
             >
               Start Quiz
             </Button>
