@@ -5,13 +5,14 @@ import { connect } from 'react-redux'
 
 import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions/decks'
-
+import { setLocalNotification } from '../utils/api'
 import DeckInfoCard from './DeckInfoCard'
 import { Button } from 'react-native-paper'
 
 const DeckList = ({ dispatch, decks, navigation }) => {
-  console.log(decks)
   useEffect(() => {
+
+    setLocalNotification()
     getDecks().then((receivedDecks) => dispatch(receiveDecks(receivedDecks)))
   }, [])
 
@@ -37,7 +38,6 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = ({decks, snackbar}) => {
-  console.log(decks)
   return {
     decks,
     snack: snackbar

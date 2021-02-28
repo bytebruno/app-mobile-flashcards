@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { handleRemoveDeck } from '../actions/decks'
 import { handleShowSuccessSnackBar, handleShowErrorSnackBar } from '../actions/snackbar'
 import { numberOfCardsWithLabelText } from '../utils/helpers'
+import { setLocalNotification, clearLocalNotification, clearAll } from '../utils/api'
 
 const DeckDetail = ({ route, decks, dispatch, navigation }) => {
   if (decks === undefined) return null
@@ -26,6 +27,9 @@ const DeckDetail = ({ route, decks, dispatch, navigation }) => {
       dispatch(handleShowErrorSnackBar('No cards on this deck...'))
       return null
     } else {
+      clearLocalNotification().then(() => {
+        setLocalNotification() 
+      })
       navigation.push('Quiz', {deck: selectedDeck})
     }
   }

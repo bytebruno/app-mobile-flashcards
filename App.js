@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
 
-import { enableScreens } from 'react-native-screens';
+import { enableScreens } from 'react-native-screens'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
@@ -19,7 +19,7 @@ import NewDeck from './components/NewDeck'
 import NewQuestion from './components/NewQuestion'
 import Quiz from './components/Quiz'
 
-enableScreens();
+enableScreens()
 
 const theme = {
   ...DefaultTheme,
@@ -32,16 +32,35 @@ export default function App() {
   return (
     <NavigationContainer>
       <Provider store={createStore(reducers, applyMiddleware(thunk))}>
-     
         <PaperProvider theme={theme}>
-            <Stack.Navigator initialRouteName="DeckList"> 
-              <Stack.Screen name='DeckList' component={DeckList} options={{headerTitle: 'Decks'}} />
-              <Stack.Screen name='DeckDetail' component={DeckDetail} options={{headerTitle: 'Deck'}} />
-              <Stack.Screen name='NewDeck' component={NewDeck} options={{headerTitle: 'New Deck'}} />
-              <Stack.Screen name='NewQuestion' component={NewQuestion} options={{headerTitle: 'New Question'}} />
-              <Stack.Screen name='Quiz' component={Quiz} options={{headerTitle: 'Quiz'}} />
-            </Stack.Navigator>
-            <SnackbarComp />
+          <Stack.Navigator initialRouteName='DeckList'>
+            <Stack.Screen
+              name='DeckList'
+              component={DeckList}
+              options={{ headerTitle: 'Decks' }}
+            />
+            <Stack.Screen
+              name='DeckDetail'
+              component={DeckDetail}
+              options={{ headerTitle: 'Deck' }}
+            />
+            <Stack.Screen
+              name='NewDeck'
+              component={NewDeck}
+              options={{ headerTitle: 'New Deck' }}
+            />
+            <Stack.Screen
+              name='NewQuestion'
+              component={NewQuestion}
+              options={{ headerTitle: 'New Question' }}
+            />
+            <Stack.Screen
+              name='Quiz'
+              component={Quiz}
+              options={{ headerTitle: 'Quiz' }}
+            />
+          </Stack.Navigator>
+          <SnackbarComp />
         </PaperProvider>
       </Provider>
     </NavigationContainer>
