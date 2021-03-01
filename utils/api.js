@@ -10,7 +10,7 @@ export const saveDeck = ({ deck, key }) => {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY).then((results) => {
     const data = JSON.parse(results)
 
-    if (data[key] !== undefined) {
+    if (data !== null && data[key] !== undefined) {
       return Promise.reject('Deck already exists')
     } else {
       return AsyncStorage.mergeItem(
