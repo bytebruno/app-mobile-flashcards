@@ -80,6 +80,14 @@ const Quiz = ({ route, navigation }) => {
         >
           Restart Quiz
         </Button>
+        <Button
+          icon='arrow-left'
+          mode='outlined'
+          style={styles.button}
+          onPress={() => navigation.pop()}
+        >
+          Back to deck
+        </Button>
       </View>
     </View>
   )

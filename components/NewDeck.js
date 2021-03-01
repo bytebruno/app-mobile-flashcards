@@ -7,7 +7,7 @@ import { handleAddDeck } from '../actions/decks'
 import { handleShowSuccessSnackBar, handleShowErrorSnackBar } from '../actions/snackbar'
 
 const NewDeck = ({ dispatch, navigation }) => {
-  const [title, setTitle] = useState('New Title')
+  const [title, setTitle] = useState('')
 
   const createDeckObject = (name) => {
     return {

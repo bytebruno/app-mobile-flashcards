@@ -3,6 +3,7 @@
 Mobile Flashcards App
 
 ## Project Setup
+**This project was tested only on Android devices.**
 
 * Clone the Project - `https://github.com/bytebruno/app-mobile-flashcards.git`
 * Install the dependencies - `yarn install` or `npm install` 
@@ -14,6 +15,9 @@ Mobile Flashcards App
 * React Native
 * Redux
 * React Native Paper UI
+
+## Author
+* **Bruno Rodrigues** - bytebruno@gmail.com
 
 ## Android Local Environment
 
