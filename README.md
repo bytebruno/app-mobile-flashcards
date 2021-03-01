@@ -3,7 +3,7 @@
 Mobile Flashcards App
 
 ## Project Setup
-**This project was tested only on Android devices.**
+**This project was tested only on Android Emulator (Pixel 2 - API 30 - Android 11.0).**
 
 * Clone the Project - `https://github.com/bytebruno/app-mobile-flashcards.git`
 * Install the dependencies - `yarn install` or `npm install` 
